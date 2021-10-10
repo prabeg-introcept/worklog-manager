@@ -1,0 +1,13 @@
+{
+    "authors": [
+        {
+            "name": "prabeg-introcept",
+            "email": "prabeg.shakya@introcept.co"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "."
+        }
+    }
+}
