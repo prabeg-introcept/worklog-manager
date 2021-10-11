@@ -21,19 +21,25 @@ class LoginController extends Controller{
     }
 
     public function login(Request $request) {
-        $credentials = $request->getBody();
+        $this->viewData['input'] = $request->getBody();
 
-        $user = $this->user->getUser(['username' => $credentials['username']]);
-
-
-        if($user && password_verify($credentials['password'], $user->password)){
-            Session::set('user_id', $user->id);
-            Session::set('username', $user->username);
-            Response::redirect('/main');
+        foreach($this->viewData['input'] as $key => $value){
+            if(empty($value)){
+                $this->viewData['error'][$key] = "Please enter $key.";
+            }
         }
 
-        $this->viewData['error'] = "Invalid Credentials. Please try again";
+        if(empty(array_values($this->viewData['error']))){
+            $user = $this->user->getUser(['username' => $this->viewData['input']['username']]);
 
+            if($user && password_verify($this->viewData['input']['password'], $user->password)){
+                Session::set('user_id', $user->id);
+                Session::set('username', $user->username);
+                Response::redirect('/main');
+            }
+    
+            $this->viewData['error']['credentials'] = "Invalid Credentials. Please try again";
+        }
         $this->view('login', $this->viewData);
     }
 }

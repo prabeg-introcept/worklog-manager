@@ -23,6 +23,9 @@
             <?= $viewData['error']['Password']?>
         </div>
     </div>
+    <div>
+        <?= $viewData['error']['credentials']?>
+    </div>
     <button type="submit">Login</button>
 </form>
 <div>
