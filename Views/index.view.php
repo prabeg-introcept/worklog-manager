@@ -1,5 +1,5 @@
 <?php require 'templates/header.php'?>
 
-<h1><?= 'Hello'?></h1>
+<h1>Dashboard</h1>
 
 <?php require 'templates/footer.php'?>

@@ -11,10 +11,6 @@ use App\Core\Session;
 class LoginController extends Controller{
     protected User $user;
 
-    protected array $viewData = [
-        'error' => []
-    ];
-
     public function __construct()
     {
         $this->user = new User();
