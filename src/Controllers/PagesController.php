@@ -3,12 +3,10 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Core\Response;
 
 class PagesController extends Controller{
     public function index() {
-        $viewData = [
-            'title' => 'Home Page'
-        ];
-        $this->view('index', $viewData);
+        empty($_SESSION) ? Response::redirect('/login') : Response::redirect('/main');
     }
 }
