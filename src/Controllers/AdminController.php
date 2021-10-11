@@ -22,8 +22,10 @@ class AdminController extends Controller{
 
     public function index() {
         $worklogs = (array) $this->worklog->getAllWorklogs();
+        $pages = $this->worklog->getPaginationNumber();
 
-        $this->view('Admin/dashboard', $worklogs);
+        $this->view('Admin/dashboard', array('worklogs' => $worklogs,
+         'pages' => $pages));
     }
 
     public function show(Request $request, $id){

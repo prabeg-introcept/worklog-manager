@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($viewData as $worklog): ?>
+            <?php foreach($viewData['worklogs'] as $worklog): ?>
                 <tr>
                     <td>
                         <?= date('Y-m-d, h:i A', strtotime($worklog->created_at))?>                             
@@ -39,6 +39,17 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <?php for($page = 1; $page <= $viewData['pages']; $page++):?>
+                <li class="page-item">
+                    <?= '<a class="page-link" href="/admin-dashboard?page='.$page.'">'.' '.$page.' '.'</a>'?>
+                </li>
+            <?php endfor?>
+        </ul>
+    </nav>
+
 </div>
 
 <?php require_once '../src/Views/templates/header.php'?>
