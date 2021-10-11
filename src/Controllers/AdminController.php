@@ -26,6 +26,7 @@ class AdminController extends Controller{
 
         $this->view('Admin/dashboard', array('worklogs' => $worklogs,
          'pages' => $pages));
+
     }
 
     public function show(Request $request, $id){

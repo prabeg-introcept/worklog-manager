@@ -18,16 +18,16 @@ class Worklog extends Model{
     public function createWorklog(array $worklogData) {
         $sql = sprintf(
             "INSERT INTO ".self::TABLE."(%s) VALUES(%s)",
-             implode(', ', array_keys($worklogData)),
-             ':'.implode(', :', array_keys($worklogData))
-            );
+            implode(', ', array_keys($worklogData)),
+            ':'.implode(', :', array_keys($worklogData))
+        );
         $this->db->run($sql, $worklogData);
     }
 
     public function getAllWorklogs() {
         $this->setTotalRecords("SELECT COUNT(*) FROM ".self::TABLE);
         $this->offset = ($this->getCurrentPage() * $this->limit) - $this->limit;
-        
+
         $sql = "SELECT 
                         worklogs.id,
                         worklogs.description,
@@ -44,6 +44,7 @@ class Worklog extends Model{
                 ORDER BY worklogs.created_at DESC
                 LIMIT $this->offset, $this->limit";
 
+
         $statement = $this->db->run($sql);
 
         return $statement->fetchAll(PDO::FETCH_CLASS, self::class);
@@ -51,7 +52,6 @@ class Worklog extends Model{
 
     public function getUserWorklogs() {
         $currentUserId = Session::get('user_id');
-
         $this->setTotalRecords("SELECT COUNT(*) FROM ".self::TABLE." WHERE user_id=$currentUserId" );
         $this->offset = ($this->getCurrentPage() * $this->limit) - $this->limit;
 
@@ -94,7 +94,7 @@ class Worklog extends Model{
                 WHERE worklogs.%s = %s
                 ORDER BY worklogs.created_at DESC",
             implode('', array_keys($worklogData)),
-            ':'.implode('', array_keys($worklogData))    
+            ':'.implode('', array_keys($worklogData))
         );
 
         $statement = $this->db->run($sql, $worklogData);
