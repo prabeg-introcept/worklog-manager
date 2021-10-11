@@ -4,6 +4,7 @@ namespace App\Core;
 
 use PDO;
 use PDOException;
+use PDOStatement;
 
 class Database {
     protected PDO $pdo;
@@ -23,7 +24,7 @@ class Database {
         }
     }
 
-    public function run(string $sql, array $params = null){
+    public function run(string $sql, array $params = null): PDOStatement {
         $statement = $this->pdo->prepare($sql);
 
         if(!is_null($params)){

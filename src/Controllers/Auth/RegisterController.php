@@ -8,22 +8,19 @@ use App\Core\Response;
 use App\Models\User;
 
 class RegisterController extends Controller {
-    protected User $user;
-
     public function __construct()
     {
         $this->user = new User();
     }
 
     public function index() {
-        $this->view('register');
+        $this->view('Auth/register');
     }
 
     public function register(Request $request) {
         $validationMsg = [
             'confirmPassword' => 'Please re-enter password for confirmation'
         ];
-
         $userData = $request->getBody();
 
         $this->viewData['input'] = $userData;
@@ -44,6 +41,6 @@ class RegisterController extends Controller {
             Response::redirect('/login');
         }
 
-        $this->view('register', $this->viewData);
+        $this->view('Auth/register', $this->viewData);
     }
 }

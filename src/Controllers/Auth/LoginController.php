@@ -17,7 +17,7 @@ class LoginController extends Controller{
     }
 
     public function index() {
-        $this->view('login');
+        $this->view('Auth/login');
     }
 
     public function login(Request $request) {
@@ -35,11 +35,15 @@ class LoginController extends Controller{
             if($user && password_verify($this->viewData['input']['password'], $user->password)){
                 Session::set('user_id', $user->id);
                 Session::set('username', $user->username);
-                Response::redirect('/main');
+                if((boolean) $user->is_admin) {
+                    Response::redirect('/admin-dashboard');
+                }
+                else {
+                    Response::redirect('/main');
+                }
             }
-    
-            $this->viewData['error']['credentials'] = "Invalid Credentials. Please try again";
+            $this->viewData['error']['both'] = "Invalid Credentials. Please try again";
         }
-        $this->view('login', $this->viewData);
+        $this->view('Auth/login', $this->viewData);
     }
 }
