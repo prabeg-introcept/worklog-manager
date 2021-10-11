@@ -26,6 +26,12 @@ class Database {
     public function run(string $sql, array $params = null){
         $statement = $this->pdo->prepare($sql);
 
+        if(!is_null($params)){
+            foreach($params as $key=>$value) {
+                $statement->bindValue(":$key", $value);
+            }
+        }
+
         try{
             $statement->execute($params);
         }
