@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 
-class LoginController extends Controller {
+class WorklogController extends Controller {
     public function index() {
-        $this->view('login');
+        $this->view('index');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Core\Controller;
 use App\Core\Request;
@@ -8,7 +8,10 @@ use App\Core\Response;
 use App\Models\User;
 
 class RegisterController extends Controller {
-    protected User $user;
+    protected array $viewData = [
+        'error' => [],
+        'input' => []
+    ];
 
     public function __construct()
     {
@@ -20,18 +23,13 @@ class RegisterController extends Controller {
     }
 
     public function register(Request $request) {
-        $validationMsg = [
-            'confirmPassword' => 'Please re-enter password for confirmation'
-        ];
-
         $userData = $request->getBody();
+
         $this->viewData['input'] = $userData;
 
         foreach($this->viewData['input'] as $key => $value){
             if(empty($value)){
-                $this->viewData['error'][$key] = array_key_exists($key, $validationMsg) ? 
-                $validationMsg[$key] : 
-                "Please enter $key.";
+                $this->viewData['error'][$key] = "Please enter $key.";
             }
         }
 
@@ -40,7 +38,7 @@ class RegisterController extends Controller {
 
             $this->user->createUser($userData);
             
-            Response::redirect('/login');
+            Response::redirect('/');
         }
 
         $this->view('register', $this->viewData);

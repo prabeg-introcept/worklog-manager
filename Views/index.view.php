@@ -1,5 +1,5 @@
-<?require 'templates/header.php'?>
+<?php require 'templates/header.php'?>
 
-<h1><?= $viewData['title']?></h1>
+<h1><?= 'Hello'?></h1>
 
-<?require 'templates/footer.php'?>
+<?php require 'templates/footer.php'?>
