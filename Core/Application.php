@@ -5,6 +5,7 @@ namespace App\Core;
 use App\Core\Request;
 use App\Core\Router;
 use App\Core\Database;
+use App\Core\Session;
 use Exception;
 
 class Application {
@@ -16,6 +17,7 @@ class Application {
     public function __construct(array $dbConfig)
     {
         self::$app = $this;
+        Session::init();
         $this->database = new Database($dbConfig);
         $this->request = new Request();
         $this->router = new Router($this->request);

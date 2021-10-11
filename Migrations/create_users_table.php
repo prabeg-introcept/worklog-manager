@@ -2,7 +2,6 @@
 
 require '../vendor/autoload.php';
 
-use App\Core\Database;
 use App\Migrations\BaseMigration;
 
 class CreateUsersTable extends BaseMigration{

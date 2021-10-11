@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Controllers\Auth;
 
 use App\Core\Controller;
 use App\Core\Request;
@@ -25,6 +25,7 @@ class RegisterController extends Controller {
         ];
 
         $userData = $request->getBody();
+
         $this->viewData['input'] = $userData;
 
         foreach($this->viewData['input'] as $key => $value){
