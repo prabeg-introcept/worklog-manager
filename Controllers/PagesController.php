@@ -6,9 +6,9 @@ use App\Core\Controller;
 
 class PagesController extends Controller{
     public function index() {
-        $data = [
+        $viewData = [
             'title' => 'Home Page'
         ];
-        return $this->view('index', $data);
+        $this->view('index', $viewData);
     }
 }

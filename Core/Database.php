@@ -8,7 +8,7 @@ use PDOException;
 class Database {
     protected PDO $pdo;
 
-    public function __construct($dbConfig)
+    public function __construct(array $dbConfig)
     {
         $dsn = $dbConfig['dsn'] ?? '';
         $username = $dbConfig['username'] ?? '';
@@ -23,16 +23,16 @@ class Database {
         }
     }
 
-    public function run($sql, $params = null){
-        $stmt = $this->pdo->prepare($sql);
+    public function run(string $sql, array $params = null){
+        $statement = $this->pdo->prepare($sql);
 
         try{
-            $stmt->execute($params);
+            $statement->execute($params);
         }
         catch(PDOException $ex){
             die("PDO Exception: ".$ex->getMessage());
         } 
 
-        return $stmt;
+        return $statement;
     }
 }

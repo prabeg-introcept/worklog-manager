@@ -13,7 +13,7 @@ class Application {
     protected Router $router;
     public Database $database;
 
-    public function __construct($dbConfig)
+    public function __construct(array $dbConfig)
     {
         self::$app = $this;
         $this->database = new Database($dbConfig);

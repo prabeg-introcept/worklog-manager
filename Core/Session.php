@@ -7,16 +7,15 @@ class Session {
         session_start();
     }
 
-    public static function set($key, $value){
+    public static function set(string $key, string $value){
         $_SESSION[$key] = $value;
     }
 
-    public static function get($key){
+    public static function get(string $key){
         return $_SESSION[$key];
     }
 
-    public static function remove($key){
+    public static function remove(string $key){
         unset($_SESSION[$key]);
     }
-
 }
