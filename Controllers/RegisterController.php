@@ -8,10 +8,7 @@ use App\Core\Response;
 use App\Models\User;
 
 class RegisterController extends Controller {
-    protected array $viewData = [
-        'error' => [],
-        'input' => []
-    ];
+    protected User $user;
 
     public function __construct()
     {
@@ -23,13 +20,18 @@ class RegisterController extends Controller {
     }
 
     public function register(Request $request) {
-        $userData = $request->getBody();
+        $validationMsg = [
+            'confirmPassword' => 'Please re-enter password for confirmation'
+        ];
 
+        $userData = $request->getBody();
         $this->viewData['input'] = $userData;
 
         foreach($this->viewData['input'] as $key => $value){
             if(empty($value)){
-                $this->viewData['error'][$key] = "Please enter $key.";
+                $this->viewData['error'][$key] = array_key_exists($key, $validationMsg) ? 
+                $validationMsg[$key] : 
+                "Please enter $key.";
             }
         }
 
