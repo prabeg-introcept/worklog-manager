@@ -1,5 +1,5 @@
-<?require 'templates/head.php'?>
+<?require 'templates/header.php'?>
 
 <h1><?= $viewData['title']?></h1>
 
-<?require 'templates/foot.php'?>
+<?require 'templates/footer.php'?>
