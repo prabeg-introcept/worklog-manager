@@ -14,7 +14,7 @@ class CreateUsersTable extends BaseMigration{
             password VARCHAR(255),
             is_admin BOOLEAN DEFAULT 0,
             department_id INT,
-            FOREIGN KEY (department_id) REFERENCES departments(id)
+            FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE SET NULL
             )";
         $this->db->run($sql);
     }
