@@ -41,7 +41,7 @@ class RegisterController extends Controller {
 
             $this->user->createUser($userData);
             
-            Response::redirect('/');
+            Response::redirect('/login');
         }
 
         $this->view('register', $this->viewData);
