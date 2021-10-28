@@ -9,6 +9,12 @@ use PDO;
 class Worklog extends Model{
     protected const TABLE = "worklogs";
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->limit = 3; // set limit to override default value
+    }
+
     public function createWorklog(array $worklogData) {
         $sql = sprintf(
             "INSERT INTO ".self::TABLE."(%s) VALUES(%s)",
@@ -19,6 +25,9 @@ class Worklog extends Model{
     }
 
     public function getAllWorklogs() {
+        $this->setTotalRecords("SELECT COUNT(*) FROM ".self::TABLE);
+        $this->offset = ($this->getCurrentPage() * $this->limit) - $this->limit;
+        
         $sql = "SELECT 
                         worklogs.id,
                         worklogs.description,
@@ -32,7 +41,8 @@ class Worklog extends Model{
                             INNER JOIN departments 
                             ON users.department_id = departments.id)
                 ON worklogs.user_id = users.id
-                ORDER BY worklogs.created_at DESC";
+                ORDER BY worklogs.created_at DESC
+                LIMIT $this->offset, $this->limit";
 
         $statement = $this->db->run($sql);
 
@@ -41,6 +51,10 @@ class Worklog extends Model{
 
     public function getUserWorklogs() {
         $currentUserId = Session::get('user_id');
+
+        $this->setTotalRecords("SELECT COUNT(*) FROM ".self::TABLE." WHERE user_id=$currentUserId" );
+        $this->offset = ($this->getCurrentPage() * $this->limit) - $this->limit;
+
         $sql = "SELECT 
                     worklogs.id,
                     worklogs.description,
@@ -54,7 +68,8 @@ class Worklog extends Model{
                             ON users.department_id = departments.id)
                 ON worklogs.user_id = users.id
                 WHERE worklogs.user_id = $currentUserId
-                ORDER BY worklogs.created_at DESC";
+                ORDER BY worklogs.created_at DESC
+                LIMIT $this->offset, $this->limit";
 
         $statement = $this->db->run($sql);
 

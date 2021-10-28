@@ -20,8 +20,9 @@ class WorklogController extends Controller{
 
     public function index() {
         $worklogs = $this->worklog->getUserWorklogs();
+        $pages = $this->worklog->getPaginationNumber();
 
-        $this->view('Employee/dashboard', $worklogs);
+        $this->view('Employee/dashboard', array('worklogs' => $worklogs, 'pages' => $pages));
     }
 
     public function getWorklogForm() {
