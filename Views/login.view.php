@@ -1,4 +1,4 @@
-<?require 'templates/header.php'?>
+<?php require 'templates/header.php'?>
 
 <form action="/login" method="post">
     <div>
@@ -23,11 +23,14 @@
             <?= $viewData['error']['Password']?>
         </div>
     </div>
+    <div>
+        <?= $viewData['error']['credentials']?>
+    </div>
     <button type="submit">Login</button>
 </form>
-
 <div>
     <p>New? Register <a href="/register">Here</a></p>
 </div>
       
-<?require 'templates/footer.php'?>
+<?php require 'templates/footer.php'?>
+

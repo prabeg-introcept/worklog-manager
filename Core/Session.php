@@ -15,7 +15,7 @@ class Session {
         return $_SESSION[$key];
     }
 
-    public static function remove(string $key){
-        unset($_SESSION[$key]);
+    public static function remove(){
+        session_unset();
     }
 }

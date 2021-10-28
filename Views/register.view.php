@@ -1,4 +1,4 @@
-<?require 'templates/header.php'?>
+<?php require 'templates/header.php'?>
 
 <form action="/register" method="post">
     <div>
@@ -48,4 +48,4 @@
     <button type="submit">Register</button>
 </form>
 
-<?require 'templates/footer.php'?>
+<?php require 'templates/footer.php'?>
