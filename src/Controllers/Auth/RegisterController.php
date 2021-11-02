@@ -36,9 +36,13 @@ class RegisterController extends Controller {
         if(empty(array_values($this->viewData['error']))){
             $userData['password'] = password_hash($userData['password'], PASSWORD_DEFAULT); 
 
-            $this->user->createUser($userData);
-            
-            Response::redirect('/login');
+            try{
+                $this->user->createUser($userData);
+
+                Response::redirect('/login');
+            }catch (\PDOException $ex) {
+                echo $ex->getMessage();
+            }
         }
 
         $this->view('Auth/register', $this->viewData);

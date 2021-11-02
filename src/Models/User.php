@@ -28,6 +28,10 @@ class User extends Model {
              ':'.implode(', :', array_keys($userData))
             );
             
-        $this->db->run($sql, $userData);
+        $stmt = $this->db->run($sql, $userData);
+
+        if(!$stmt) {
+            throw new \PDOException("User with entered data already exists");
+        }
     }
 }
