@@ -14,11 +14,9 @@ class Application {
     protected Router $router;
     public Database $database;
 
-    public function __construct(array $dbConfig)
+    public function __construct()
     {
-        self::$app = $this;
         Session::init();
-        $this->database = new Database($dbConfig);
         $this->request = new Request();
         $this->router = new Router($this->request);
     }

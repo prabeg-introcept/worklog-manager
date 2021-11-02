@@ -2,8 +2,9 @@
 
 namespace App\Core;
 
-use App\Core\Database;
 use App\Core\Application;
+use App\Core\Database;
+use Dotenv\Dotenv;
 
 abstract class Model {
     protected Database $db;
@@ -14,7 +15,20 @@ abstract class Model {
 
     public function __construct()
     {
-        $this->db = Application::$app->database;
+        //$this->db = Application::$app->database;
+
+        $dotenv = Dotenv::createImmutable(dirname(dirname(__DIR__)));
+        $dotenv->load();
+
+        $config = [
+            'db' => [
+                'dsn'=> $_ENV['DB_DSN'],
+                'username'=> $_ENV['DB_USERNAME'],
+                'password'=> $_ENV['DB_PASSWORD'],
+            ]
+        ];
+
+        $this->db = new Database($config['db']);
     }
 
     public function setTotalRecords($sql) {

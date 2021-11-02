@@ -33,13 +33,6 @@ class Database {
             }
         }
 
-        try{
-            $statement->execute($params);
-        }
-        catch(PDOException $ex){
-            die("PDO Exception: ".$ex->getMessage());
-        } 
-
-        return $statement;
+        return $statement->execute($params);
     }
 }
