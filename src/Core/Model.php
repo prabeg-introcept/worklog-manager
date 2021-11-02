@@ -8,7 +8,7 @@ use App\Core\Application;
 abstract class Model {
     protected Database $db;
 
-    protected int $totaRecords;
+    protected int $totalRecords;
     protected int $offset = 0;
     protected int $limit = 5;
 
@@ -18,7 +18,7 @@ abstract class Model {
     }
 
     public function setTotalRecords($sql) {
-        $statement = $this->db->run($sql); 
+        $statement = $this->db->run($sql);
         $this->totalRecords = $statement->fetchColumn();
     }
 

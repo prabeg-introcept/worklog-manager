@@ -15,7 +15,6 @@ class WorklogController extends Controller{
         AuthMiddleware::auth();
         $this->worklog = new Worklog();
         $this->feedback = new Feedback();
-
     }
 
     public function index() {

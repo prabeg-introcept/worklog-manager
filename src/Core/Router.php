@@ -40,14 +40,14 @@ class Router {
 
     public function resolve() {
         self::loadRoutes('../src/routes.php');
-
+        
         $method = $_REQUEST['_method'] ?? $this->request->getHttpMethod();
         $uri = $this->request->getUri();
 
         $id = substr(ltrim($uri, '/'), strpos(ltrim($uri, '/'), '/')+1) ?? '';
-        
+
         if(is_string($id) && preg_match('/^[0-9]*$/', $id)){
-            $oldUri = substr($uri, 0, strpos(ltrim($uri, '/'), '/') + 2);
+            $oldUri = substr($uri, 0, strpos(ltrim($uri, '/'), '/') + 2).'{id}';
             self::$routes[$method][$uri] = self::$routes[$method][$oldUri];
             unset(self::$routes[$method][$oldUri]);
         }

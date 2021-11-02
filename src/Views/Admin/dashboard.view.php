@@ -14,6 +14,7 @@
         </thead>
         <tbody>
             <?php foreach($viewData['worklogs'] as $worklog): ?>
+
                 <tr>
                     <td>
                         <?= date('Y-m-d, h:i A', strtotime($worklog->created_at))?>                             
